@@ -1,0 +1,23 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/circleci-store9
+    docker:
+      - image: maven:3.5.0-jdk-9
+
+    steps:
+      - checkout
+
+      - restore_cache:
+          key: circleci-store9-{{ checksum "pom.xml" }}
+
+      - run: ([[ ! -d $JAVA_HOME/conf ]] && ln -s $JAVA_HOME/lib $JAVA_HOME/conf)
+
+      - run: mvn package
+
+      - save_cache:
+          paths:
+            - ~/.m2
+          key: circleci-store9-{{ checksum "pom.xml" }}
+
+

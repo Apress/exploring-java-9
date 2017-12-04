@@ -1,0 +1,22 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/circleci-feature9
+    docker:
+      - image: maven:3.5.0-jdk-9
+
+    steps:
+      - checkout
+
+      - restore_cache:
+          key: circleci-feature9-{{ checksum "pom.xml" }}
+
+      - run: mvn test
+
+      - save_cache:
+          paths:
+            - ~/.m2
+          key: circleci-feature9-{{ checksum "pom.xml" }}
+
+      - store_test_results:
+          path: target/surefire-reports

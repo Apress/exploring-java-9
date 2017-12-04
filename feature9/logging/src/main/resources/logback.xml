@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true">
+  <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>%d | %5.5level [%10.10thread] %20.20logger{20} : %msg%n</pattern>
+    </encoder>
+  </appender>
+  <root level="ALL">
+    <appender-ref ref="CONSOLE"/>
+  </root>
+</configuration>
